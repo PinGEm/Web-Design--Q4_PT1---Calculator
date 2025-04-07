@@ -21,11 +21,16 @@
             $value;
             $output = $_SESSION["output"];
             $display = "0";
-            $number_array = array('1','2','3','4','5','6','7','8','9');
-            $calc_array = array('1','2','3','4','5','6','7','8','9','-','+','*','/','(',')');
+            $number_array = array('0','1','2','3','4','5','6','7','8','9');
+            $calc_array = array('0','1','2','3','4','5','6','7','8','9','-','+','*','/','(',')','.');
             if(isset($_GET['number']))
             {
+                $lc_output = substr($output,offset: -1,length: 1);
                 if($output == "0")
+                {
+                    $output = $_GET['number'];
+                }
+                else if((in_array($lc_output, $calc_array) == false))
                 {
                     $output = $_GET['number'];
                 }
@@ -41,12 +46,22 @@
 
             if(isset($_GET['operator']))
             {
-                $output .= $_GET['operator'];
+                $lc_output = substr($output,offset: -1,length: 1);
+
+                if(in_array($lc_output, $calc_array) == false)
+                {
+                    $output = $_GET['operator'];
+                }
+                else
+                {
+                    $output .= $_GET['operator'];
+                }
             }
             if(isset($_GET['clear_latest']))
             {
+                $fc_output = substr($output,offset: 0,length: 1);
                 $lc_output = substr($output,offset: -1,length: 1);
-                if(in_array($lc_output, $calc_array) == false)
+                if(in_array($lc_output, $calc_array) == false || in_array($fc_output, $calc_array) == false)
                 {
                     $output = 0;
                 }
