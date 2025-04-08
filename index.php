@@ -77,7 +77,7 @@
             {
                 // Calculate the output. Account for any errors as well
                 $lc_output = substr($output,offset: -1,length: 1);
-                if(in_array($lc_output, $number_array) == true)
+                if(in_array($lc_output, $number_array) == true && checkValidity($output) == true)
                 {
                     $value = eval('return ' . $output . ';');
                 }
@@ -99,6 +99,10 @@
                 $display = $output; // let's constantly set the output to the display.
             }
 
+            function checkValidity($code)
+            {
+                return @eval('return true;' . $code);
+            }
             echo"<p style='margin-right:5%; overflow:hidden;'>$display</p>";
             ?>
         </div>
