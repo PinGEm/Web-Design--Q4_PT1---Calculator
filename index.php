@@ -9,6 +9,7 @@
 <body>
     <div class="base" style="padding-top:0.001%;">
         <div class="output">
+            <p style='margin-right:5%; overflow:hidden;'>
             <?php
             session_start();
 
@@ -77,7 +78,7 @@
             {
                 // Calculate the output. Account for any errors as well
                 $lc_output = substr($output,offset: -1,length: 1);
-                if(in_array($lc_output, $number_array) == true && checkValidity($output) == true)
+                if(in_array($lc_output, $number_array) == true)
                 {
                     $value = eval('return ' . $output . ';');
                 }
@@ -98,13 +99,9 @@
             {
                 $display = $output; // let's constantly set the output to the display.
             }
-
-            function checkValidity($code)
-            {
-                return @eval('return true;' . $code);
-            }
-            echo"<p style='margin-right:5%; overflow:hidden;'>$display</p>";
+            echo"$display";
             ?>
+            </p>
         </div>
 
         <div class="input_buttons">
